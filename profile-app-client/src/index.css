@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.centered{
+  margin: 0 auto;
+  margin-top: 55px;
+  width: 55%;
+  height: 550px;  
+  border: 0.1px gray solid;
+  box-shadow: #99f874 15px 15px 20px;
+  background: linear-gradient(90deg, rgba(255,255,255,1) 43%, rgba(153,248,116,1) 55%, rgba(199,255,178,1) 100%, rgba(0,212,255,1) 100%)
+}
+
+.buttons{
+  display: flex;
+  flex-direction: column;
+  margin-left: 125px;
+  margin-bottom: 55px;
+}
+
+.t-align-l{
+  text-align: left;
+}
+
+.home-button{
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  width: 125px;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #99f874;
+}
+
+.margin-l{
+  margin-left: 55px;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+.flex-c{
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-r{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  margin-left: 55px;
+  margin-top: 35px;
+}
+
+label{
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.form-input{
+  padding: 10px 0px 10px 0px;
+  border: 1px rgb(255, 255, 255) solid;
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(225,254,204,1) 37%, rgba(213,238,203,1) 61%, rgba(146,236,140,1) 100%);
+  border-radius: 5px;
+}
+
+.margin-t{
+  margin-top: 35px;
+  font-weight: bold;
+  width: 120px;
+  background-color: #99f874;
+  border: 0.1px gray solid;
+  border-radius: 10px;
+  padding: 7px 5px 7px 5px;
+}
+
+.margin-r{
+  margin-right: 55px;
+}
+
+.login-img{
+  margin: 0 auto;
+  margin-top: 55px;
+  width: 400px;
+  border-radius: 25px;
+}
