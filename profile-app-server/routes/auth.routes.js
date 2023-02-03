@@ -2,6 +2,7 @@ const router = require("express").Router();
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.model");
+const { isAuthenticated }= require("../middlewares/jwt.middleware");
 
 const saltRounds = 10;
 
@@ -23,8 +24,8 @@ router.post("/signup", (req,res)=>{
         User.create({username,password:hashedPassword,campus,course})
         .then(DBresponse=>{
           console.log(DBresponse)
-          const {username, campus, course, _id } = DBresponse
-          const user = {username,campus,course,_id}
+          const {username, campus, course, _id, image } = DBresponse
+          const user = {username,campus,course,_id, image}
           res.status(200).json({user:user})
         })
 
@@ -40,7 +41,6 @@ router.post("/signup", (req,res)=>{
 })
 
 router.post('/login', (req,res)=>{
-  console.log(req.body)
   const {username, password} = req.body
   User.findOne({username})
     .then(foundUser=>{
@@ -49,15 +49,16 @@ router.post('/login', (req,res)=>{
         return;
       }
       const passwordCorrect = bcrypt.compareSync(password, foundUser.password)
-
       if (passwordCorrect){
-        const {username, course, campus, _id} = foundUser
-        const payload = {username,course,campus,_id}
+        const {username, course, campus, _id, image} = foundUser
+        const payload = {username,course,campus,_id, image}
+        console.log("here"+ process.env.TOKEN_SECRET)
         const authToken = jwt.sign(
           payload,
           process.env.TOKEN_SECRET,
-          { algorithm: 'HS256', expiresIn: "12h" }
+          { algorithm: 'HS256', expiresIn: "6h" }
         )
+        console.log(authToken)
         res.status(200).json({ authToken: authToken })
       }
       else {
@@ -67,6 +68,12 @@ router.post('/login', (req,res)=>{
     })
     .catch(err => res.status(500).json({ message: "Internal Server Error" }))
 
+})
+
+router.get("/verify", isAuthenticated, (req,res)=>{
+  const authorization = req.payload
+  console.log(authorization)
+  res.status(200).json(authorization)
 })
 
 module.exports = router;

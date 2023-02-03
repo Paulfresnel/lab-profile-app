@@ -1,27 +1,39 @@
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
 import axios from "axios"
-
-
+import { AuthContext } from "../context/auth.context"
+import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 function Login(){
     const [username,setUsername] = useState('')
     const [password,setPassword] = useState('')
+    const navigate = useNavigate()
+
+
+    const {user, isLoggedIn, authentificateUser, storeToken} = useContext(AuthContext)
 
         const handleSubmit = (e)=>{
             e.preventDefault()
             axios.post(`http://localhost:5005/auth/login`, {username, password})
                 .then(response=>{
-                    console.log("response" + " "+response)
+                    storeToken(response.data.authToken)
+                    authentificateUser()    
+                    navigate("/profile")
                 })
         }
 
-
+        
     return(
         <div className="flex-r centered">
         <div className="flex-c">
             <div className="margin-l">
-                <h1 className="t-align-l">IronProfile</h1>
+            <div className="flexing">
+            <Link to={"/"}>
+            <img className="smally" src="https://cdn-icons-png.flaticon.com/512/25/25694.png"/>
+            </Link>
+            <h1 className="t-align-l">IronProfile</h1>
+                </div>
                 <p style={{width:450, textAlign:"left"}}>Log in to enjoy all of our website's features and functionalities</p>
             </div>
             <div>
